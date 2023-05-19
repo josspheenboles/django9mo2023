@@ -1,0 +1,30 @@
+{%extends 'parent.html'%}
+{%block title%}
+Tasks-List
+{%endblock%}
+{%block content%}
+<h1>List from child page
+</br>
+    {{pagename| linebreaks}}
+</br>
+   {#{{tasks|first}}#}
+    {{3| add:5}}
+</h1>
+{{pagename}}
+<table width="100" border="1" style="color:black">
+    <tr>
+        <th>Name</th>
+    </tr>
+    {% for task in tasks%}
+        {%if task != 'task1'%}
+        <tr>
+            <td>
+                {{task}}
+            </td>
+        </tr>
+        {%endif%}
+
+    {%endfor%}
+</table>
+
+{%endblock%}

@@ -1,0 +1,24 @@
+{%extends 'parent.html'%}
+{%block content%}
+<table width="100%" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Catagory</th>
+        <th>Actions</th>
+    </tr>
+    {%for task in tasks%}
+    <tr>
+        <td>{{task.id}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.catagoryobj.name}}</td>
+        <td>
+            <a href="{% url 'TasksUpdate' task.id %}">Update</a>
+            <a href="{% url 'TasksDelete' task.id %}">Delete</a>
+        </td>
+    </tr>
+
+    {%endfor%}
+</table>
+
+{%endblock%}

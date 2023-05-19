@@ -1,0 +1,22 @@
+{%extends 'parent.html'%}
+{%block title%}
+Tasks-Update
+{%endblock%}
+
+{%block content%}
+
+<form method="post">
+    {%csrf_token%}
+    <input name="name" required placeholder="Task name" value="{{task.name}}">
+    </br>
+    <select name="catagory">
+        <option value="#">  select catagor</option>
+        {%for cat in catagories%}
+            <option value="{{cat.id}}" {%if task.catagoryobj.id == cat.id %} selected {%endif%}>{{cat.name}}</option>
+        {%endfor%}
+
+    </select>
+    </br>
+    <input type="submit" value="Update">
+</form>
+{%endblock%}
