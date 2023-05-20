@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('',list,name='TasksList'),
-    path('Tasks/Add',taskadd,name='TasksAdd'),
+    path('Tasks/Add',TaskGErtnic.as_view(),name='TasksAdd'),
     path('Tasks/Update/<int:ID>',taskupdate,name='TasksUpdate'),
     path('Tasks/Delete/<int:ID>',taskdelete,name='TasksDelete'),
 

@@ -5,9 +5,9 @@ Tasks-Add
 
 {%block content%}
 
-<form method="post">
+<form method="post" action="{%url 'TasksAdd' %}">
     {%csrf_token%}
-    {{myform}}
+    {{form}}
     <input type="submit" value="Add">
 </form>
 {%endblock%}

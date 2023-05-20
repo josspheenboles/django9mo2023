@@ -7,10 +7,7 @@
 <body>
 <form method="post">
     {%csrf_token%}
-     <input name="username" value="enter username">
-    </br>
-    <input name="password" value="enter Password" type="password">
-    </br>
+{{form}}
     <input type="submit" value="Login">
 </form>
 <div style="color:red">

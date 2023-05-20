@@ -1,33 +1,65 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse,HttpResponseRedirect
 from .models import *
+from .forms import TaskForm,TaskformModel
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from django.views import View
+from django.views.generic import CreateView
+
+class TaskGErtnic(CreateView):
+    model = Task
+    fields='__all__'
+
+
+
+
 
 # Create your views here.
+@require_http_methods(['POST','GET'])
 def taskadd(req):
     #return HttpResponse('Task add form will be load')
     #return  HttpResponseRedirect('/')
     context = {}
+    myform=TaskformModel()
     # select all catagories
     context['catagories'] = Catagory.objects.all()
 
     if(req.method=='GET'):
+        context['myform']=myform
         return render(req,'tasks/add.html',context)
     else:
         #insert task in model task
-        #get data
-        nameinpu=req.POST['name']
-        catagoryid=req.POST['catagory']
-        #create object from task mode
-        Task.objects.create(name=nameinpu,catagoryobj=  Catagory.objects.get(id=catagoryid))
+        myform=TaskForm(req.POST)
+        if(myform.is_valid()):
+            #create object from task mode
+            myform.save()
         #t=Task(name=nameinpu)
         #t.catagoryobj=Catagory.objects.get(id=catagoryid)
         #save object
         #t.save()
-        return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/')
+
+class TaskADD(View):
+    def get(self,req):
+        context={}
+        myform=TaskForm
+        context['myform'] = myform
+        return render(req, 'tasks/add.html', context)
+    def post(self,req):
+        # insert task in model task
+        myform = TaskForm(req.POST)
+        if (myform.is_valid()):
+            # create object from task mode
+            myform.save()
+            # t=Task(name=nameinpu)
+            # t.catagoryobj=Catagory.objects.get(id=catagoryid)
+            # save object
+            # t.save()
+            return HttpResponseRedirect('/')
 
 
 
-#view method httprequest as argument & return HttpResponse
 def list(request):
     '''
     print(type(request))
@@ -42,7 +74,9 @@ def list(request):
     context['tasks']=['task1','task2','task3']
     '''
     context={}
+
     #get all task from model
+
     context['tasks']=Task.objects.all()
     return  render(request,'tasks/list.html',context)
 

@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+#SESSION_EXPIRAT_BROWSER_CLOASE=True
 ROOT_URLCONF = 'day1demo.urls'
 
 TEMPLATES = [
